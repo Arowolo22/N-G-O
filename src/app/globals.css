@@ -2,7 +2,14 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0b1220;
+  --muted: #5b667a;
+  --card: #ffffff;
+  --border: rgba(16, 24, 40, 0.12);
+
+  --brand: #0ea5e9; /* sky-500 */
+  --brand-2: #14b8a6; /* teal-500 */
+  --danger: #ef4444;
 }
 
 @theme inline {
@@ -23,4 +30,20 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--brand) 30%, white);
+}
+
+/* Subtle grid + glow background for a modern NGO look */
+.app-bg {
+  background:
+    radial-gradient(1200px 600px at 10% 0%, color-mix(in oklab, var(--brand) 18%, transparent), transparent 60%),
+    radial-gradient(900px 500px at 90% 10%, color-mix(in oklab, var(--brand-2) 16%, transparent), transparent 62%),
+    linear-gradient(to bottom, #ffffff, #f7fbff);
 }
