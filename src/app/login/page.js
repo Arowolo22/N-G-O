@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/config/firebase";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -29,10 +30,13 @@ export default function LoginPage() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       setSubmitted(true);
+      toast.success("Welcome back! Redirecting...");
       const redirect = searchParams?.get("redirect") || "/";
       setTimeout(() => router.push(redirect), 800);
     } catch (err) {
-      setError(err?.message || "Failed to sign in. Please check your credentials.");
+      const msg = err?.message || "Failed to sign in. Please check your credentials.";
+      setError(msg);
+      toast.error(msg);
     } finally {
       setLoading(false);
     }

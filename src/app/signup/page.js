@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "@/config/firebase";
+import toast from "react-hot-toast";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -38,9 +39,12 @@ export default function SignupPage() {
         displayName: `${firstName} ${lastName}`.trim(),
       });
       setSubmitted(true);
-      setTimeout(() => router.push("/"), 800);
+      toast.success("Account created! Redirecting...");
+      setTimeout(() => router.push("/login"), 800);
     } catch (err) {
-      setError(err?.message || "Failed to sign up. Please try again.");
+      const msg = err?.message || "Failed to sign up. Please try again.";
+      setError(msg);
+      toast.error(msg);
     } finally {
       setLoading(false);
     }

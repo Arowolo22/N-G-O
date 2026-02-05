@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 import { Container } from "@/components/Container";
 import { Motion } from "@/components/Motion";
 import { Button } from "@/components/Button";
@@ -47,6 +48,7 @@ export default function ContactPage() {
                 onSubmit={(e) => {
                   e.preventDefault();
                   setSent(true);
+                  toast.success("Message sent. We'll get back to you soon.");
                 }}
               >
                 <div className="grid gap-3 sm:grid-cols-2">

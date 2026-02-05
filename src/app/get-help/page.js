@@ -7,9 +7,16 @@ import { Motion } from "@/components/Motion";
 import { Button } from "@/components/Button";
 import { PhoneCall, ShieldAlert, HeartHandshake, LifeBuoy } from "lucide-react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function GetHelpPage() {
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [location, setLocation] = useState("");
+  const [message, setMessage] = useState("");
 
   return (
     <Motion>
@@ -103,42 +110,91 @@ export default function GetHelpPage() {
 
               <form
                 className="mt-5 grid gap-3"
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
-                  setSent(true);
+                  setError("");
+                  setLoading(true);
+                  try {
+                    const res = await fetch("/api/get-help", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        name,
+                        phone,
+                        location,
+                        message,
+                      }),
+                    });
+                    const data = await res.json().catch(() => ({}));
+                    if (!res.ok) {
+                      const msg = data.error || "Something went wrong. Please try again or call the hotline.";
+                      setError(msg);
+                      toast.error(msg);
+                      return;
+                    }
+                    setSent(true);
+                    setName("");
+                    setPhone("");
+                    setLocation("");
+                    setMessage("");
+                    toast.success("Request sent. We'll respond as soon as possible.");
+                  } catch (err) {
+                    const msg = "Failed to send. Please try again or call the hotline.";
+                    setError(msg);
+                    toast.error(msg);
+                  } finally {
+                    setLoading(false);
+                  }
                 }}
               >
                 <div className="grid gap-3 sm:grid-cols-2">
                   <input
                     required
                     placeholder="Your name"
-                    className="h-11 rounded-2xl bg-white/80 px-4 text-sm text-black ring-1  focus:outline-none focus:ring-2 ring-black/10"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="h-11 rounded-2xl bg-white/80 px-4 text-sm text-black ring-1 focus:outline-none focus:ring-2 ring-black/10"
                   />
                   <input
                     required
                     placeholder="Phone number"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     className="h-11 rounded-2xl bg-white/80 px-4 text-sm ring-1 ring-black/10 focus:outline-none focus:ring-2 text-black"
                   />
                 </div>
                 <input
                   placeholder="Your location (city / area)"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                   className="h-11 rounded-2xl bg-white/80 px-4 text-sm ring-1 ring-black/10 focus:outline-none focus:ring-2 text-black"
                 />
                 <textarea
                   required
                   rows={4}
                   placeholder="Tell us what is happening and what you need (safe details only)"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   className="rounded-2xl bg-white/80 px-4 py-3 text-sm ring-1 ring-black/10 focus:outline-none focus:ring-2 text-black"
                 />
-                <button className="h-12 rounded-2xl bg-slate-950 text-white font-extrabold hover:bg-slate-900 transition">
-                  Send request
+                {error && (
+                  <div className="rounded-2xl bg-red-50 text-red-800 ring-1 ring-red-200 px-4 py-3 text-sm">
+                    {error}
+                  </div>
+                )}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="h-12 rounded-2xl bg-slate-950 text-white font-extrabold hover:bg-slate-900 transition disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {loading ? "Sending..." : "Send request"}
                 </button>
-                {sent ? (
-                  <div className="rounded-2xl bg-emerald-50 text-emerald-900 ring-1 ring-emerald-200 px-4 py-3 text-sm">
+                {/* {sent ? (
+                  <div className="rounded-2xl bg-emerald-50 text-emerald-900 ring-1 ring-emerald-200 px-1 py-3 text-sm">
                     Request received. If you are in danger, please call the hotline
                     immediately.
                   </div>
-                ) : null}
+                ) : null} */}
               </form>
             </div>
 

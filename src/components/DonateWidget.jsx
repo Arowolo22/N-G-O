@@ -7,6 +7,7 @@ import { ShieldAlert, Sparkles, CreditCard, Repeat, Lock } from "lucide-react";
 import { useDonations } from "@/hooks/useDonations";
 import { useAuth } from "@/contexts/AuthContext";
 import { formatNGN } from "@/lib/money";
+import toast from "react-hot-toast";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Button } from "@/components/Button";
 
@@ -37,30 +38,36 @@ export function DonateWidget({ caseItem }) {
     setError("");
 
     if (!user) {
+      toast.error("Please sign in to donate.");
       router.push("/login?redirect=/donate");
       return;
     }
 
     const amt = Number(amount);
     if (!Number.isFinite(amt) || amt <= 0) {
-      setError("Enter a valid donation amount.");
+      const msg = "Enter a valid donation amount.";
+      setError(msg);
+      toast.error(msg);
       return;
     }
 
     setBusy(true);
     try {
       if (method !== "demo") {
-        setError(
-          "Payment integration is coming soon. For now, please use Demo to simulate a donation.",
-        );
+        const msg = "Payment integration is coming soon. For now, please use Demo to simulate a donation.";
+        setError(msg);
+        toast.error(msg);
         return;
       }
 
       // Frontend-only demo donation: persist to localStorage and update UI instantly.
       addDonation(caseItem.id, amt);
       router.refresh?.();
+      toast.success(`Thank you! You donated ${formatNGN(amt)} to this case.`);
     } catch (err) {
-      setError(err?.message || "Something went wrong.");
+      const msg = err?.message || "Something went wrong.";
+      setError(msg);
+      toast.error(msg);
     } finally {
       setBusy(false);
     }
