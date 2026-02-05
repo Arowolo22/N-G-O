@@ -2,15 +2,19 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ShieldAlert, Sparkles, CreditCard, Repeat } from "lucide-react";
+import Link from "next/link";
+import { ShieldAlert, Sparkles, CreditCard, Repeat, Lock } from "lucide-react";
 import { useDonations } from "@/hooks/useDonations";
+import { useAuth } from "@/contexts/AuthContext";
 import { formatNGN } from "@/lib/money";
 import { ProgressBar } from "@/components/ProgressBar";
+import { Button } from "@/components/Button";
 
 const preset = [5000, 10000, 25000, 50000];
 
 export function DonateWidget({ caseItem }) {
   const router = useRouter();
+  const { user } = useAuth();
   const { getTotalFor, addDonation } = useDonations();
   const raised = getTotalFor(caseItem.id);
 
@@ -31,6 +35,11 @@ export function DonateWidget({ caseItem }) {
   async function onDonate(e) {
     e.preventDefault();
     setError("");
+
+    if (!user) {
+      router.push("/login?redirect=/donate");
+      return;
+    }
 
     const amt = Number(amount);
     if (!Number.isFinite(amt) || amt <= 0) {
@@ -55,6 +64,36 @@ export function DonateWidget({ caseItem }) {
     } finally {
       setBusy(false);
     }
+  }
+
+  // Show login prompt if user is not logged in
+  if (!user) {
+    return (
+      <div className="rounded-3xl bg-white/70 ring-1 ring-black/10 shadow-sm p-6">
+        <div className="flex flex-col items-center justify-center gap-4 py-8 text-center">
+          <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-slate-900/5 ring-1 ring-black/10">
+            <Lock className="h-8 w-8 text-slate-700" />
+          </div>
+          <div>
+            <h3 className="text-lg font-extrabold tracking-tight text-slate-950">
+              Sign in to donate
+            </h3>
+            <p className="mt-2 text-sm text-slate-700">
+              You need to create an account or sign in before you can make a
+              donation.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row w-full sm:w-auto">
+            <Button href="/signup" variant="primary" className="h-12">
+              Sign Up
+            </Button>
+            <Button href="/login" variant="subtle" className="h-12">
+              Sign In
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -205,7 +244,7 @@ export function DonateWidget({ caseItem }) {
           </div>
 
           <label className="grid gap-1">
-            <span className="text-xs font-semibold text-slate-700">
+            <span className="text-xs font-semibold text-black">
               Optional message
             </span>
             <textarea
@@ -227,7 +266,7 @@ export function DonateWidget({ caseItem }) {
           <button
             type="submit"
             disabled={busy}
-            className="h-12 w-full rounded-2xl bg-gradient-to-r from-sky-500 to-teal-500 text-white font-extrabold shadow-lg shadow-sky-500/15 hover:brightness-105 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="h-12 w-full rounded-2xl bg-slate-950 text-white font-extrabold shadow-lg hover:bg-slate-900 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {busy ? "Processing…" : `Donate ${formatNGN(amount)} now`}
           </button>

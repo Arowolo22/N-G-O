@@ -6,10 +6,37 @@ import { motion } from "framer-motion";
 import { Motion } from "@/components/Motion";
 import { Container } from "@/components/Container";
 import { ShieldCheck } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/config/firebase";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setSubmitted(true);
+      const redirect = searchParams?.get("redirect") || "/";
+      setTimeout(() => router.push(redirect), 800);
+    } catch (err) {
+      setError(err?.message || "Failed to sign in. Please check your credentials.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Motion>
@@ -48,29 +75,30 @@ export default function LoginPage() {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+              transition={{
+                duration: 0.6,
+                ease: [0.22, 1, 0.36, 1],
+                delay: 0.05,
+              }}
               className="rounded-[2.25rem] bg-white/70 ring-1 ring-black/10 shadow-sm p-7 sm:p-9"
             >
               <div className="text-sm font-bold text-slate-950">Login</div>
               <h1 className="mt-2 text-2xl font-extrabold tracking-tight text-slate-950">
                 Sign in to Arowolo NGO
               </h1>
-              
 
-              <form
-                className="mt-6 grid gap-3"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSubmitted(true);
-                }}
-              >
+              <form className="mt-6 grid gap-3" onSubmit={handleSubmit}>
                 <label className="grid gap-1">
-                  <span className="text-xs font-semibold text-slate-700">Email</span>
+                  <span className="text-xs font-semibold text-slate-700">
+                    Email
+                  </span>
                   <input
                     required
                     type="email"
                     placeholder="you@example.com"
-                    className="h-11 rounded-2xl bg-white/80 px-4 text-sm text-black ring-1 ring-black/10 focus:outline-none focus:ring-2 "
+                    className="h-11 rounded-2xl bg-white/80 px-4 text-sm text-black ring-1 ring-black/10 focus:outline-none focus:ring-2 focus:ring-sky-400/50"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </label>
                 <label className="grid gap-1">
@@ -81,17 +109,28 @@ export default function LoginPage() {
                     required
                     type="password"
                     placeholder="••••••••"
-                    className="h-11 rounded-2xl bg-white/80 text-black px-4 text-sm ring-1  ring-black/10 focus:outline-none focus:ring-2"
+                    className="h-11 rounded-2xl bg-white/80 text-black px-4 text-sm ring-1 ring-black/10 focus:outline-none focus:ring-2 focus:ring-sky-400/50"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </label>
+                {error && (
+                  <div className="text-red-500 text-sm text-center">
+                    {error}
+                  </div>
+                )}
 
-                <button className="mt-2 h-12 rounded-2xl bg-slate-950 text-white font-extrabold hover:bg-slate-900 transition">
-                  Login
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="mt-2 h-12 rounded-2xl bg-slate-950 text-white font-extrabold hover:bg-slate-900 transition disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {loading ? "Signing in..." : "Login"}
                 </button>
 
                 {submitted ? (
                   <div className="rounded-2xl bg-emerald-50 text-emerald-900 ring-1 ring-emerald-200 px-4 py-3 text-sm">
-                    Demo login submitted. Add real authentication when ready.
+                    Login successful! Redirecting...
                   </div>
                 ) : null}
 

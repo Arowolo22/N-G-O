@@ -143,10 +143,11 @@ function HomeClient() {
 
         <section className="relative mt-15 pb-14 sm:pb-16">
           <Container>
-            <div className="grid gap-6 lg:grid-cols-3">
+            <div className="grid gap-6  lg:grid-cols-3">
               <SoftCard
                 icon={PhoneCall}
                 title="Need help now?"
+             
               >
                 If you or someone you know is in immediate danger, call our hotline
                 and get urgent support and safety guidance.

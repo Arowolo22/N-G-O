@@ -5,7 +5,7 @@ const base =
 
 const variants = {
   primary:
-    "bg-gradient-to-r from-sky-500 to-teal-500 text-white shadow-lg shadow-sky-500/15 hover:brightness-105 active:scale-[0.99]",
+    "bg-white/70 text-black shadow-lg active:scale-[0.99]",
   ghost:
     "bg-white/70 text-slate-900 ring-1 ring-black/10 shadow-sm hover:bg-white active:scale-[0.99]",
   dark: "bg-slate-900 text-white shadow-md hover:bg-slate-950 active:scale-[0.99]",

@@ -41,7 +41,7 @@ export default function AboutPage() {
             >
               <div className="relative aspect-[16/12]">
                 <Image                  
-                src="/ceo-img.jpg"
+                src="/founder.jpg"
                   alt="Founder of Arowolo NGO"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
