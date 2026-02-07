@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { Container } from "@/components/Container";
@@ -11,7 +11,7 @@ import { CASES, getCaseById } from "@/lib/cases";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-export default function DonatePage() {
+function DonateContent() {
   const sp = useSearchParams();
   const caseIdFromQuery = sp?.get("case");
 
@@ -103,4 +103,18 @@ export default function DonatePage() {
   );
 }
 
-
+export default function DonatePage() {
+  return (
+    <Suspense
+      fallback={
+        <section className="py-12 sm:py-16">
+          <Container>
+            <div className="h-64 animate-pulse rounded-3xl bg-white/50 ring-1 ring-black/10" />
+          </Container>
+        </section>
+      }
+    >
+      <DonateContent />
+    </Suspense>
+  );
+}

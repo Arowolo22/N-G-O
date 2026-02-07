@@ -6,13 +6,13 @@ import { motion } from "framer-motion";
 import { Motion } from "@/components/Motion";
 import { Container } from "@/components/Container";
 import { ShieldCheck } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import toast from "react-hot-toast";
 
-export default function LoginPage() {
+function LoginContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -156,4 +156,19 @@ export default function LoginPage() {
   );
 }
 
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <section className="py-10 sm:py-14">
+          <Container>
+            <div className="h-64 animate-pulse rounded-3xl bg-white/50 ring-1 ring-black/10" />
+          </Container>
+        </section>
+      }
+    >
+      <LoginContent />
+    </Suspense>
+  );
+}
 
