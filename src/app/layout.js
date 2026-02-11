@@ -3,7 +3,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "@/components/Toaster";
-import { AuthProvider } from "@/contexts/AuthContext";
+// import { AuthProvider } from "@/contexts/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,14 +29,14 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased app-bg min-h-dvh`}
       >
-        <AuthProvider>
+        {/* <AuthProvider> */}
           <div className="min-h-dvh flex flex-col">
             <Navbar />
             <main className="flex-1">{children}</main>
             <Footer />
           </div>
           <Toaster />
-        </AuthProvider>
+        {/* </AuthProvider> */}
       </body>
     </html>
   );
