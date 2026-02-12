@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { HeartHandshake, Shield, Menu } from "lucide-react";
 import { Container } from "@/components/Container";
@@ -43,12 +44,17 @@ export function Navbar() {
         <div className="flex items-center justify-between gap-4">
           <Link
             href="/"
-            className="flex items-center gap-2 font-extrabold tracking-tight text-slate-950"
+            className="flex items-center gap-4 font-extrabold tracking-tight text-slate-950"
           >
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-md shadow-brand/10">
-              <Shield className="h-5 w-5" aria-hidden="true" />
-            </span>
-            <span className="text-base sm:text-lg">Arowolo Health Foundation</span>
+            {/* Logo constrained to a reasonable height to fit navbar */}
+            <Image 
+              src="/logo-company.png" 
+              alt="Arowolo Health Foundation" 
+              width={200} 
+              height={60}
+              className="h-16 w-auto object-contain" 
+              priority
+            />
           </Link>
 
           <nav className="hidden items-center gap-6 md:flex">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { HeartHandshake, PhoneCall, Mail, MapPin } from "lucide-react";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -8,11 +9,13 @@ export function Footer() {
       <Container className="py-12">
         <div className="grid gap-10 md:grid-cols-3">
           <div className="space-y-3">
-            <div className="flex items-center gap-2 font-extrabold tracking-tight text-slate-950">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-md shadow-brand/10">
-                <HeartHandshake className="h-5 w-5" aria-hidden="true" />
+            <div className="flex items-center gap-4 font-extrabold tracking-tight text-slate-950">
+              {/* LOGO SPACE: Replace the span below with your <Image /> component */}
+              <Image src="/logo-company.png" alt="Logo" width={100} height={40} />
+              {/* <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-md shadow-brand/10">
+                <HeartHandshake className="h-6 w-6" aria-hidden="true" />
               </span>
-              <span>Arowolo Health Foundation</span>
+              <span>Arowolo Health Foundation</span> */}
             </div>
             <p className="text-sm leading-6 text-slate-700">
               We are dedicated to ending the Tuberculosis epidemic — providing testing, treatment, and support for a TB-free future.

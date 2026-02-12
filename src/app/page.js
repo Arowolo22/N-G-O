@@ -20,15 +20,15 @@ function SoftCard({ icon, title, children }) {
   const Icon = icon;
   return (
     <div className="rounded-3xl bg-white/70 ring-1 ring-black/10 shadow-sm p-6">
-      <div className="flex items-start gap-3">
-        <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-md shadow-brand/10">
+      <div className="flex flex-col items-start gap-4">
+        <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-md shadow-brand/10">
           <Icon className="h-5 w-5" aria-hidden="true" />
         </span>
         <div>
-          <div className="text-base font-extrabold tracking-tight text-slate-950">
+          <div className="text-lg font-extrabold tracking-tight text-slate-950">
             {title}
           </div>
-          <div className="mt-1 text-sm leading-6 text-slate-700">{children}</div>
+          <div className="mt-2 text-sm leading-6 text-slate-700">{children}</div>
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@ function HomeClient() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-xs font-semibold text-brand-2 ring-1 ring-black/10"
+                className="inline-flex  items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-xs font-semibold text-black ring-1 ring-black/10"
               >
                 <Activity className="h-4 w-4" aria-hidden="true" />
                 Testing · Treatment · Cure
@@ -109,7 +109,7 @@ function HomeClient() {
                 transition={{ duration: 0.7, delay: 0.3 }}
                 className="mt-10 rounded-3xl bg-black/30 ring-1 ring-white/15 backdrop-blur-md p-5"
               >
-                <div className="grid gap-5 sm:grid-cols-3">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
                   <div>
                     <div className="text-3xl font-extrabold tracking-tight text-white">
                       <AnimatedCounter value={1200} suffix="+" />
@@ -142,10 +142,11 @@ function HomeClient() {
 
         <section className="relative mt-15 pb-14 sm:pb-16">
           <Container>
-            <div className="grid gap-6 lg:grid-cols-3">
+            <div className="grid gap-6  justify-center lg:grid-cols-3">
               <SoftCard
                 icon={Stethoscope}
                 title="Early Detection"
+                
               >
                 We bring mobile X-ray and GeneXpert testing units directly to remote and underserved communities to catch TB early.
                 <div className="mt-3">

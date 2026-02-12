@@ -3,9 +3,9 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ShieldAlert, Sparkles, CreditCard, Repeat, Lock } from "lucide-react";
+import { ShieldAlert, Sparkles, Lock } from "lucide-react";
 import { useDonations } from "@/hooks/useDonations";
-import { useAuth } from "@/contexts/AuthContext";
+
 import { formatNGN } from "@/lib/money";
 import toast from "react-hot-toast";
 import { ProgressBar } from "@/components/ProgressBar";
@@ -15,11 +15,11 @@ const preset = [5000, 10000, 25000, 50000];
 
 export function DonateWidget({ caseItem }) {
   const router = useRouter();
-  const { user } = useAuth();
+
   const { getTotalFor, addDonation } = useDonations();
   const raised = getTotalFor(caseItem.id);
 
-  const [frequency, setFrequency] = useState("one_time"); // or monthly
+
   const [method, setMethod] = useState("demo"); // demo | stripe | paystack (UI only for now)
   const [amount, setAmount] = useState(10000);
   const [name, setName] = useState("");
@@ -37,11 +37,7 @@ export function DonateWidget({ caseItem }) {
     e.preventDefault();
     setError("");
 
-    if (!user) {
-      toast.error("Please sign in to donate.");
-      router.push("/login?redirect=/donate");
-      return;
-    }
+
 
     const amt = Number(amount);
     if (!Number.isFinite(amt) || amt <= 0) {
@@ -73,35 +69,7 @@ export function DonateWidget({ caseItem }) {
     }
   }
 
-  // Show login prompt if user is not logged in
-  if (!user) {
-    return (
-      <div className="rounded-3xl bg-white/70 ring-1 ring-black/10 shadow-sm p-6">
-        <div className="flex flex-col items-center justify-center gap-4 py-8 text-center">
-          <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-slate-900/5 ring-1 ring-black/10">
-            <Lock className="h-8 w-8 text-slate-700" />
-          </div>
-          <div>
-            <h3 className="text-lg font-extrabold tracking-tight text-slate-950">
-              Sign in to donate
-            </h3>
-            <p className="mt-2 text-sm text-slate-700">
-              You need to create an account or sign in before you can make a
-              donation.
-            </p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row w-full sm:w-auto">
-            <Button href="/signup" variant="primary" className="h-12">
-              Sign Up
-            </Button>
-            <Button href="/login" variant="subtle" className="h-12">
-              Sign In
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+
 
   return (
     <div className="rounded-3xl bg-white/70 ring-1 ring-black/10 shadow-sm p-6">
@@ -147,56 +115,12 @@ export function DonateWidget({ caseItem }) {
         </div>
 
         <div className="grid gap-3">
-          <div className="grid gap-2 sm:grid-cols-2">
-            <div className="rounded-2xl bg-white/70 ring-1 ring-black/10 p-3">
-              <div className="text-xs font-semibold text-slate-700">Frequency</div>
-               <div className="mt-2 grid grid-cols-2 gap-2"> 
-                 <button
-                  type="button"
-                  onClick={() => setFrequency("one_time")}
-                  className={`h-10 rounded-xl text-sm font-semibold ring-1 transition ${
-                    frequency === "one_time"
-                      ? "bg-slate-950 text-white ring-black/10"
-                      : "bg-white/70 text-slate-900 ring-black/10 hover:bg-white"
-                  }`}
-                >
-                  <CreditCard className="mr-1 inline h-4 w-4" />
-                  One‑time
-                </button> 
-                <button
-                  type="button"
-                  onClick={() => setFrequency("monthly")}
-                  className={`h-10 rounded-xl text-sm font-semibold ring-1 transition ${
-                    frequency === "monthly"
-                      ? "bg-slate-950 text-white ring-black/10"
-                      : "bg-white/70 text-slate-900 ring-black/10 hover:bg-white"
-                  }`}
-                >
-                  <Repeat className="mr-1 inline h-4 w-4" />
-                  Monthly
-                </button> 
-              </div>
-            </div>
+          <div className="grid gap-2">
             <div className="rounded-2xl bg-white/70 ring-1 ring-black/10 p-3">
               <div className="flex items-center justify-between gap-3">
                 <div className="text-xs font-semibold text-slate-700">Payment</div>
-                
               </div>
-              <div className="mt-2 grid grid-cols-2 gap-2">
-               
-                <button
-                  type="button"
-                  onClick={() => setMethod("stripe")}
-                  className={`h-10 rounded-xl text-sm font-semibold ring-1 transition ${
-                    method === "stripe"
-                      ? "bg-slate-950 text-white ring-black/10"
-                      : "bg-white/50 text-slate-500 ring-black/10"
-                  }`}
-                  aria-disabled="true"
-                  title="Stripe integration coming soon"
-                >
-                  Stripe
-                </button>
+              <div className="mt-2 grid grid-cols-1 gap-2">
                 <button
                   type="button"
                   onClick={() => setMethod("paystack")}
