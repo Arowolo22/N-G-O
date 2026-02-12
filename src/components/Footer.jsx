@@ -9,14 +9,13 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-3">
           <div className="space-y-3">
             <div className="flex items-center gap-2 font-extrabold tracking-tight text-slate-950">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-teal-500 text-white shadow-md shadow-sky-500/10">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-md shadow-brand/10">
                 <HeartHandshake className="h-5 w-5" aria-hidden="true" />
               </span>
-              <span>Arowolo NGO</span>
+              <span>Arowolo Health Foundation</span>
             </div>
             <p className="text-sm leading-6 text-slate-700">
-              We protect vulnerable adults from abuse, neglect, and hardship —
-              restoring safety, dignity, and urgent support.
+              We are dedicated to ending the Tuberculosis epidemic — providing testing, treatment, and support for a TB-free future.
             </p>
           </div>
 
@@ -81,7 +80,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col gap-2 border-t border-black/10 pt-6 text-xs text-slate-600 sm:flex-row sm:items-center sm:justify-between">
-          <div>© {new Date().getFullYear()} Arowolo NGO. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} Arowolo Health Foundation. All rights reserved.</div>
           <div className="flex items-center gap-3">
             <Link href="/privacy" className="hover:text-slate-950">
               Privacy

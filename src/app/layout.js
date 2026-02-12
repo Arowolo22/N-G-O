@@ -16,10 +16,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Arowolo NGO — Saving Vulnerable Adults",
+  title: "Arowolo Health Foundation — Ending Tuberculosis",
   description:
-    "Arowolo NGO protects vulnerable adults from abuse, neglect, and hardship. Donate, volunteer, or seek help immediately.",
-  applicationName: "Arowolo NGO",
+    "Arowolo Health Foundation is dedicated to the eradication of Tuberculosis. We provide testing, treatment, and nutritional support to vulnerable patients.",
+  applicationName: "Arowolo Health Foundation",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 

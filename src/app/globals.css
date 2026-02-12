@@ -2,17 +2,22 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0b1220;
-  --muted: #5b667a;
+  --foreground: #0f172a; /* slate-900 */
+  --muted: #64748b; /* slate-500 */
   --card: #ffffff;
-  --border: rgba(16, 24, 40, 0.12);
+  --border: rgba(15, 118, 110, 0.15); /* teal-700 at 15% */
 
-  --brand: #0ea5e9; /* sky-500 */
-  --brand-2: #14b8a6; /* teal-500 */
+  --brand: #0f766e; /* teal-700 (Deep Teal - Healing/Medical) */
+  --brand-2: #e11d48; /* rose-600 (Soft Rose - Urgency/Care) */
+  --accent: #fbbf24; /* amber-400 (Gold - Hope) */
   --danger: #ef4444;
 }
 
 @theme inline {
+  --color-brand: var(--brand);
+  --color-brand-2: var(--brand-2);
+  --color-accent: var(--accent);
+  
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -21,8 +26,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #020617; /* slate-950 */
+    --foreground: #f8fafc; /* slate-50 */
   }
 }
 
@@ -40,10 +45,10 @@ html {
   background: color-mix(in oklab, var(--brand) 30%, white);
 }
 
-/* Subtle grid + glow background for a modern NGO look */
+/* Subtle grid + glow background for a modern Medical NGO look */
 .app-bg {
   background:
-    radial-gradient(1200px 600px at 10% 0%, color-mix(in oklab, var(--brand) 18%, transparent), transparent 60%),
-    radial-gradient(900px 500px at 90% 10%, color-mix(in oklab, var(--brand-2) 16%, transparent), transparent 62%),
-    linear-gradient(to bottom, #ffffff, #f7fbff);
+    radial-gradient(1000px 500px at 0% 0%, color-mix(in oklab, var(--brand) 12%, transparent), transparent 70%),
+    radial-gradient(800px 400px at 100% 0%, color-mix(in oklab, var(--brand-2) 8%, transparent), transparent 70%),
+    linear-gradient(to bottom, #ffffff, #f0fdfa); /* white to very light teal */
 }

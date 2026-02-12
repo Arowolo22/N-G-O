@@ -45,10 +45,10 @@ export function Navbar() {
             href="/"
             className="flex items-center gap-2 font-extrabold tracking-tight text-slate-950"
           >
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-teal-500 text-white shadow-md shadow-sky-500/10">
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-md shadow-brand/10">
               <Shield className="h-5 w-5" aria-hidden="true" />
             </span>
-            <span className="text-base sm:text-lg">Arowolo NGO</span>
+            <span className="text-base sm:text-lg">Arowolo Health Foundation</span>
           </Link>
 
           <nav className="hidden items-center gap-6 md:flex">
