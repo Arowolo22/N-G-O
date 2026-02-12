@@ -55,7 +55,7 @@ export async function POST(request) {
           ${location?.trim() ? `<p><strong>Location:</strong> ${escapeHtml(location.trim())}</p>` : ""}
           <p><strong>Message:</strong></p>
           <p style="white-space: pre-wrap; background: #f1f5f9; padding: 12px; border-radius: 8px;">${escapeHtml(message.trim())}</p>
-          <p style="color: #64748b; font-size: 12px; margin-top: 24px;">Sent from Arowolo NGO Get Help form.</p>
+          <p style="color: #64748b; font-size: 12px; margin-top: 24px;">Sent from Arowolo Health Foundation Get Help form.</p>
         </div>
       `,
     };

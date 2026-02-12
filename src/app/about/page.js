@@ -19,13 +19,13 @@ export default function AboutPage() {
             className="max-w-3xl"
           >
             <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-xs font-semibold text-slate-900 ring-1 ring-black/10">
-              About Arowolo NGO
+              About Arowolo Health Foundation
             </div>
             <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
               Compassion with structure. Safety with urgency.
             </h1>
             <p className="mt-3 text-sm leading-7 text-slate-700">
-              Arowolo NGO exists to protect vulnerable adults from abuse,
+              Arowolo Health Foundation exists to protect vulnerable adults from abuse,
               neglect, and hardship. We work fast in crises—and we stay present
               long enough for recovery to become real.
             </p>
@@ -42,7 +42,7 @@ export default function AboutPage() {
               <div className="relative aspect-[16/12]">
                 <Image                  
                 src="/founder.jpg"
-                  alt="Founder of Arowolo NGO"
+                  alt="Founder of Arowolo Health Foundation"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"

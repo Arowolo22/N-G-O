@@ -111,7 +111,7 @@ export default function ContactPage() {
                   Map
                 </div>
                 <iframe
-                  title="Arowolo NGO map"
+                  title="Arowolo Health Foundation map"
                   className="h-64 w-full"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
