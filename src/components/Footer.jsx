@@ -11,7 +11,7 @@ export function Footer() {
           <div className="space-y-3">
             <div className="flex items-center gap-4 font-extrabold tracking-tight text-slate-950">
               {/* LOGO SPACE: Replace the span below with your <Image /> component */}
-              <Image src="/logo-company.png" alt="Logo" width={100} height={40} />
+              <Image src="/company-logo.png" alt="Logo" width={200} height={40} />
               {/* <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-md shadow-brand/10">
                 <HeartHandshake className="h-6 w-6" aria-hidden="true" />
               </span>

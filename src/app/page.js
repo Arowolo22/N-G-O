@@ -44,7 +44,7 @@ function HomeClient() {
         <section className="relative">
           <div className="absolute inset-0">
             <Image
-              src="/nigeria-women-ngo.jpg"
+              src="/tuber-hero.jpg"
               alt="Medical support for TB patients"
               fill
               priority
@@ -109,7 +109,7 @@ function HomeClient() {
                 transition={{ duration: 0.7, delay: 0.3 }}
                 className="mt-10 rounded-3xl bg-black/30 ring-1 ring-white/15 backdrop-blur-md p-5"
               >
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+                <div className="grid grid-cols-3 gap-2 text-sm sm:gap-8">
                   <div>
                     <div className="text-3xl font-extrabold tracking-tight text-white">
                       <AnimatedCounter value={1200} suffix="+" />
@@ -142,7 +142,7 @@ function HomeClient() {
 
         <section className="relative mt-15 pb-14 sm:pb-16">
           <Container>
-            <div className="grid gap-6  justify-center lg:grid-cols-3">
+            <div className="grid gap-6 lg:grid-cols-3">
               <SoftCard
                 icon={Stethoscope}
                 title="Early Detection"

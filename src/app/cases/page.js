@@ -26,8 +26,7 @@ export default function CasesPage() {
               Fund a specific problem. See the impact immediately.
             </h1>
             <p className="mt-3 text-sm leading-6 text-slate-700">
-              Each case has a clear goal and live donation balance (demo mode uses
-              your browser storage). Choose someone to support today.
+              Each case has a clear goal and live donation balance  Choose someone to support today.
             </p>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">

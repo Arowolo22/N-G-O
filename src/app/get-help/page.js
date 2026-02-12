@@ -30,37 +30,32 @@ export default function GetHelpPage() {
           >
             <div className="inline-flex items-center gap-2 rounded-full bg-red-50 px-4 py-2 text-xs font-semibold text-red-800 ring-1 ring-red-200">
               <ShieldAlert className="h-4 w-4" />
-              If you're in immediate danger, call emergency services now.
+              Experiencing a persistent cough? Don't wait.
             </div>
             <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
-              Get help now — safe, confidential support.
+              Get tested today — TB is curable.
             </h1>
             <p className="mt-3 text-sm leading-7 text-slate-700">
-              If you are a vulnerable adult experiencing abuse, neglect, or
-              hardship, we can help you create a safety plan and connect you to
-              urgent support.
+              If you have been coughing for more than 2 weeks, have night sweats, 
+              or unexplained weight loss, we can help you get a free test and treatment.
             </p>
           </motion.div>
 
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
             <div className="rounded-3xl bg-white/70 ring-1 ring-black/10 shadow-sm p-6 lg:col-span-2">
               <div className="flex items-start gap-3">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 to-teal-500 text-white shadow-md shadow-sky-500/10">
+                <span className="inline-flex h-11 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-md shadow-sky-500/10">
                   <PhoneCall className="h-5 w-5" />
                 </span>
                 <div>
                   <div className="text-base font-extrabold tracking-tight text-slate-950">
-                    Emergency hotline
+                    Talk to a Health Worker
                   </div>
                   <p className="mt-2 text-sm leading-7 text-slate-700">
-                    Call any time for urgent support. If calling is unsafe,
-                    complete the form below and we will respond as quickly as
-                    possible.
+                    Call any time for confidential advice. If you are worried about symptoms 
+                    or stigma, we are here to listen and guide you.
                   </p>
                   <div className="mt-4 rounded-2xl bg-slate-900/5 ring-1 ring-black/10 px-4 py-3">
-                    {/* <div className="text-sm font-semibold text-slate-700">
-                      Hotline 
-                    </div> */}
                     <div className="mt-1 text-xl font-extrabold tracking-tight text-slate-950">
                       +234 905 350 0170
                     </div>
@@ -70,7 +65,7 @@ export default function GetHelpPage() {
                       Call now
                     </Button>
                     <Button href="/contact" variant="subtle" className="h-12">
-                      Contact us
+                      Send a message
                     </Button>
                   </div>
                 </div>
@@ -82,18 +77,18 @@ export default function GetHelpPage() {
                 <LifeBuoy className="h-5 w-5 text-white/90" />
                 <div>
                   <div className="text-base font-extrabold tracking-tight">
-                    Safety tips
+                    Common TB Symptoms
                   </div>
                   <ul className="mt-3 grid gap-2 text-sm text-white/80">
-                    <li>• Move to a safer location if possible</li>
-                    <li>• Keep important contacts accessible</li>
-                    <li>• If injured, seek medical attention immediately</li>
-                    <li>• Document what you can safely document</li>
+                    <li>• Coughing for 2+ weeks</li>
+                    <li>• Chest pain or coughing up blood</li>
+                    <li>• Night sweats and fever</li>
+                    <li>• Unexplained weight loss</li>
                   </ul>
                 </div>
               </div>
               <div className="mt-5 rounded-2xl bg-white/10 ring-1 ring-white/10 px-4 py-3 text-sm text-white/80">
-                You deserve safety and dignity. We will listen without judgment.
+                Early detection saves lives. Testing is free and confidential.
               </div>
             </div>
           </div>
@@ -101,11 +96,11 @@ export default function GetHelpPage() {
           <div className="mt-10 grid gap-6 lg:grid-cols-2 lg:items-start">
             <div className="rounded-3xl bg-white/70 ring-1 ring-black/10 shadow-sm p-6">
               <div className="text-base font-extrabold tracking-tight text-slate-950">
-                Request urgent help
+                Request a Free Screening
               </div>
               <p className="mt-2 text-sm leading-7 text-slate-700">
-                This form is for urgent support requests. If someone is in
-                immediate danger, call emergency services.
+                Fill this form if you or a loved one needs testing or support. 
+                We will contact you to arrange a visit or appointment.
               </p>
 
               <form
@@ -172,7 +167,7 @@ export default function GetHelpPage() {
                 <textarea
                   required
                   rows={4}
-                  placeholder="Tell us what is happening and what you need (safe details only)"
+                  placeholder="Describe your symptoms or what help you need..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   className="rounded-2xl bg-white/80 px-4 py-3 text-sm ring-1 ring-black/10 focus:outline-none focus:ring-2 text-black"
@@ -187,44 +182,36 @@ export default function GetHelpPage() {
                   disabled={loading}
                   className="h-12 rounded-2xl bg-slate-950 text-white font-extrabold hover:bg-slate-900 transition disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  {loading ? "Sending..." : "Send request"}
+                  {loading ? "Sending..." : "Request Call Back"}
                 </button>
-                {/* {sent ? (
-                  <div className="rounded-2xl bg-emerald-50 text-emerald-900 ring-1 ring-emerald-200 px-1 py-3 text-sm">
-                    Request received. If you are in danger, please call the hotline
-                    immediately.
-                  </div>
-                ) : null} */}
               </form>
             </div>
 
             <div className="rounded-3xl bg-white/70 ring-1 ring-black/10 shadow-sm p-6">
               <div className="flex items-start gap-3">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 to-teal-500 text-white shadow-md shadow-sky-500/10">
+                <span className="inline-flex h-11 w-22 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-md shadow-sky-500/10">
                   <HeartHandshake className="h-5 w-5" />
                 </span>
                 <div>
                   <div className="text-base font-extrabold tracking-tight text-slate-950">
-                    Resources & support
+                    Free & Confidential
                   </div>
                   <p className="mt-2 text-sm leading-7 text-slate-700">
-                    We can connect you to safe shelter, medical care, legal aid,
-                    and advocacy. Everything starts with a confidential
-                    conversation.
+                    We provide X-rays, geneXpert testing, and a full course of medication 
+                    at no cost to you. We also offer nutritional support to help you recover.
                   </p>
                   <div className="mt-5 grid gap-2 text-sm text-slate-700">
                     <div className="rounded-2xl bg-slate-900/5 ring-1 ring-black/10 px-4 py-3">
                       <span className="font-semibold text-slate-950">
-                        Confidentiality:
+                        Privacy First:
                       </span>{" "}
-                      We protect your privacy and only share information when
-                      necessary for safety.
+                      Your diagnosis is private. We work discreetly to protect you from stigma.
                     </div>
                     <div className="rounded-2xl bg-slate-900/5 ring-1 ring-black/10 px-4 py-3">
                       <span className="font-semibold text-slate-950">
-                        Consent first:
+                        Support Network:
                       </span>{" "}
-                      We explain options clearly and respect your decisions.
+                      You are not alone. Our joyful hearts club connects survivors.
                     </div>
                   </div>
                 </div>

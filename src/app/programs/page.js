@@ -16,7 +16,7 @@ function ProgramCard({ icon: Icon, title, desc }) {
       className="rounded-3xl bg-white/70 ring-1 ring-black/10 shadow-sm p-6"
     >
       <div className="flex items-start gap-3">
-        <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 to-teal-500 text-white shadow-md shadow-sky-500/10">
+        <span className="inline-flex h-11 w-22 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-md shadow-sky-500/10">
           <Icon className="h-5 w-5" aria-hidden="true" />
         </span>
         <div>
@@ -42,14 +42,14 @@ export default function ProgramsPage() {
             className="max-w-3xl"
           >
             <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-xs font-semibold text-slate-900 ring-1 ring-black/10">
-              What we do
+              Our Programs
             </div>
             <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
-              Programs built around safety, dignity, and urgent support.
+              Comprehensive care: From detection to cure.
             </h1>
             <p className="mt-3 text-sm leading-7 text-slate-700">
-              Our services are designed for real-life emergencies—fast response,
-              protection, and practical recovery.
+              Our interventions are designed to close the gap in TB services—bringing 
+              diagnostics and treatment directly to the people who need them most.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Button href="/donate" variant="primary" className="h-12">
@@ -63,24 +63,24 @@ export default function ProgramsPage() {
 
           <div className="mt-10 grid gap-6 lg:grid-cols-2">
             <ProgramCard
-              icon={Home}
-              title="Shelter & Support"
-              desc="Short‑term shelter, essentials, and case management to protect survivors in crisis and stabilize their situation."
-            />
-            <ProgramCard
               icon={Ambulance}
-              title="Emergency Response"
-              desc="Rapid crisis support, safe transport, and coordinated response when minutes matter."
-            />
-            <ProgramCard
-              icon={Scale}
-              title="Advocacy & Legal Aid"
-              desc="Rights protection, legal referrals, and advocacy to prevent further harm and ensure accountability."
+              title="Mobile X-Ray & Screening"
+              desc="We bring geneXpert testing and digital X-ray units directly to rural communities to detect TB cases early and prevent transmission."
             />
             <ProgramCard
               icon={HeartPulse}
-              title="Health & Recovery Support"
-              desc="Medical referrals, rehabilitation support, and follow‑ups to help survivors regain stability and dignity."
+              title="DOTS Treatment Support"
+              desc="Our community health workers supervise medication intake (Directly Observed Treatment) to ensure every patient completes their 6-month course."
+            />
+            <ProgramCard
+              icon={Home}
+              title="Nutrition & Food Security"
+              desc="TB medication requires a strong immune system. We provide weekly protein-rich food parcels to patients who cannot afford proper meals."
+            />
+            <ProgramCard
+              icon={Scale}
+              title="Community Advocacy"
+              desc="We train local volunteers to combat stigma, educate families on prevention, and encourage those with symptoms to get tested without fear."
             />
           </div>
         </Container>

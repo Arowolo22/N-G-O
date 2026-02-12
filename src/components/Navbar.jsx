@@ -48,10 +48,10 @@ export function Navbar() {
           >
             {/* Logo constrained to a reasonable height to fit navbar */}
             <Image 
-              src="/logo-company.png" 
+              src="/company-logo.png" 
               alt="Arowolo Health Foundation" 
-              width={200} 
-              height={60}
+               width={70} 
+               height={30}
               className="h-16 w-auto object-contain" 
               priority
             />
