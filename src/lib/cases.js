@@ -3,7 +3,7 @@ export const CASES = [
     id: "tb-treatment-adult",
     name: "Emeka Okonkwo",
     age: 34,
-    title: "Complete 6-month DOTS medication course",
+    // title: "Complete 6-month DOTS medication course",
     tbType: "Pulmonary TB",
     stage: "Active Phase (Month 2)",
     story: `Emeka is a 34-year-old father of three who works as a mechanic. He began experiencing a persistent cough and severe weight loss three months ago but delayed testing due to financial constraints.
@@ -22,15 +22,14 @@ Your donation will cover his transport to the clinic, essential food packs for h
     problem:
       "Patients need strictly adhered medication for 6 months to be cured. This fund covers the full course of antibiotics and monitoring to prevent drug resistance.",
     goalAmount: 85000, 
-    image:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
+    image:"/emeka.jpg",
     tags: ["Medication", "Cure", "Health"],
   },
   {
     id: "nutritional-support",
     name: "Fatima Yusuf",
-    age: 28,
-    title: "High-protein diet for fast recovery",
+    age: 21,
+    // title: "High-protein diet for fast recovery",
     tbType: "Extrapulmonary TB (Lymph Node)",
     stage: "Recovery Phase",
     story: `Fatima, a 28-year-old seamstress, was diagnosed with TB of the lymph nodes after noticing painful swellings in her neck. While the medication is free, the toll it takes on the body is immense.
@@ -50,15 +49,14 @@ This simple intervention significantly boosts cure rates and helps patients like
     problem:
       "TB causes severe weight loss and weakens the immune system. We provide high-protein food packs (beans, eggs, milk) to help patients rebuild strength while on medication.",
     goalAmount: 120000,
-    image:
-      "https://images.unsplash.com/photo-1505253758473-96b701d2cd03?auto=format&fit=crop&w=800&q=80",
+    image:"/fatima.jpg",
     tags: ["Food", "Nutrition", "Strength"],
   },
   {
     id: "community-screening",
     name: "Makoko Community",
     age: null,
-    title: "Early detection saves lives",
+    // title: "Early detection saves lives",
     tbType: "Prevention & Case Finding",
     stage: "Active Screening Drive",
     story: `Tuberculosis thrives in crowded, poorly ventilated areas. The Makoko community, with its high population density, is a hotspot for undetected TB cases.
@@ -76,15 +74,14 @@ Your support funds the logistics, the medical team, and the testing kits needed 
     problem:
       "Undetected TB spreads fast. We run mobile screening camps in crowded communities using chest X-rays and GeneXpert tests to find and treat cases early.",
     goalAmount: 450000,
-    image:
-      "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80",
+    image:"/makoko.jpg",
     tags: ["Prevention", "X-Ray", "Testing"],
   },
   {
     id: "pediatric-tb",
     name: "Baby Chinedu",
     age: 5,
-    title: "Specialized care for children with TB",
+    // title: "Specialized care for children with TB",
     tbType: "Primary Complex",
     stage: "Diagnosis & Initiation",
     story: `Chinedu is only 5 years old. He contracted TB from a neighbor who was unaware of their status. Pediatric TB is notoriously difficult to diagnose because children cannot produce sputum samples easily.
@@ -104,15 +101,14 @@ Saving a child from TB gives them their entire future back.`,
     problem:
       "Children with TB need child-friendly formulations and extra care. Your donation ensures they get the gentle, consistent treatment they need to grow up healthy.",
     goalAmount: 150000,
-    image:
-      "https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&w=800&q=80",
+    image:"/baby.jpg",
     tags: ["Children", "Future", "Hope"],
   },
   {
     id: "tb-isolation-support",
     name: "Grace Adebayo",
-    age: 42,
-    title: "Safe isolation for infectious patients",
+    age: 24,
+    // title: "Safe isolation for infectious patients",
     tbType: "Drug-Resistant TB (Presumptive)",
     stage: "Isolation Pending Confirmation",
     story: `Grace is a teacher who loves her students. Recently, she was flagged for potential Drug-Resistant TB (DR-TB), a more severe form of the disease that does not respond to standard drugs.
@@ -129,15 +125,14 @@ Helping Grace isolate is not just charitable; it is a public health necessity to
     problem:
       "Patients with highly infectious TB need a safe, separate space to recover without infecting family members. We provide temporary shelter and hygiene kits.",
     goalAmount: 200000,
-    image:
-      "https://images.unsplash.com/photo-1584036561566-b93a50208c1c?auto=format&fit=crop&w=800&q=80",
+    image:"/grace.png",
     tags: ["Shelter", "Safety", "Hygiene"],
   },
   {
     id: "ngo-general",
     name: "Stop TB Fund",
     age: null,
-    title: "End Tuberculosis in our lifetime",
+    // title: "End Tuberculosis in our lifetime",
     tbType: "Global Mission",
     stage: "Ongoing",
     story: `Tuberculosis is the world's deadliest infectious killer, yet it is partially preventable and treatable. The **Stop TB Fund** is the heartbeat of Arowolo Health Foundation.

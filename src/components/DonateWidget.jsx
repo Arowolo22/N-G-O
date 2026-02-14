@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ShieldAlert, Sparkles, Lock } from "lucide-react";
@@ -13,7 +13,7 @@ import { Button } from "@/components/Button";
 
 const preset = [5000, 10000, 25000, 50000];
 
-export function DonateWidget({ caseItem }) {
+export function DonateWidget({ caseItem, bare = false }) {
   const router = useRouter();
 
   const { getTotalFor, addDonation } = useDonations();
@@ -33,11 +33,19 @@ export function DonateWidget({ caseItem }) {
     return Math.min(100, (raised / caseItem.goalAmount) * 100);
   }, [caseItem.goalAmount, raised]);
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://js.paystack.co/v1/inline.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   async function onDonate(e) {
     e.preventDefault();
     setError("");
-
-
 
     const amt = Number(amount);
     if (!Number.isFinite(amt) || amt <= 0) {
@@ -47,24 +55,56 @@ export function DonateWidget({ caseItem }) {
       return;
     }
 
+    if (!email) {
+      const msg = "Please enter your email address to donate.";
+      setError(msg);
+      toast.error(msg);
+      return;
+    }
+
     setBusy(true);
     try {
-      if (method !== "demo") {
-        const msg = "Payment integration is coming soon. For now, please use Demo to simulate a donation.";
-        setError(msg);
-        toast.error(msg);
-        return;
+      if (typeof window.PaystackPop === "undefined") {
+        throw new Error("Paystack is still loading. Please try again in a moment.");
       }
 
-      // Frontend-only demo donation: persist to localStorage and update UI instantly.
-      addDonation(caseItem.id, amt);
-      router.refresh?.();
-      toast.success(`Thank you! You donated ${formatNGN(amt)} to this case.`);
+      const handler = window.PaystackPop.setup({
+        key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
+        email: email,
+        amount: amt * 100, // Paystack works in kobo
+        currency: "NGN",
+        callback: function (response) {
+          // Success!
+          addDonation(caseItem.id, amt, name);
+          router.refresh?.();
+          toast.success(`Thank you! You donated ${formatNGN(amt)} to this case.`);
+          setBusy(false);
+        },
+        onClose: function () {
+          setBusy(false);
+          toast.error("Payment cancelled.");
+        },
+        metadata: {
+          custom_fields: [
+            {
+              display_name: "Case Name",
+              variable_name: "case_name",
+              value: caseItem.name,
+            },
+            {
+              display_name: "Donor Name",
+              variable_name: "donor_name",
+              value: name,
+            },
+          ],
+        },
+      });
+
+      handler.openIframe();
     } catch (err) {
       const msg = err?.message || "Something went wrong.";
       setError(msg);
       toast.error(msg);
-    } finally {
       setBusy(false);
     }
   }
@@ -72,8 +112,14 @@ export function DonateWidget({ caseItem }) {
 
 
   return (
-    <div className="rounded-3xl bg-white/70 ring-1 ring-black/10 shadow-sm p-6">
-      <div className="flex items-start justify-between gap-4">
+    <div
+      className={`transition-all ${
+        bare
+          ? ""
+          : "rounded-3xl bg-white/70 ring-1 ring-black/10 shadow-sm p-4 sm:p-6"
+      }`}
+    >
+      <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <div className="text-sm font-bold text-slate-950">Donation progress</div>
           <div className="mt-2">
@@ -115,28 +161,6 @@ export function DonateWidget({ caseItem }) {
         </div>
 
         <div className="grid gap-3">
-          <div className="grid gap-2">
-            <div className="rounded-2xl bg-white/70 ring-1 ring-black/10 p-3">
-              <div className="flex items-center justify-between gap-3">
-                <div className="text-xs font-semibold text-slate-700">Payment</div>
-              </div>
-              <div className="mt-2 grid grid-cols-1 gap-2">
-                <button
-                  type="button"
-                  onClick={() => setMethod("paystack")}
-                  className={`h-10 rounded-xl text-sm font-semibold ring-1 transition ${
-                    method === "paystack"
-                      ? "bg-black text-white ring-black/10"
-                      : "bg-white/50 text-slate-500 ring-black/10"
-                  }`}
-                  aria-disabled="true"
-                  title="Paystack integration coming soon"
-                >
-                  Paystack
-                </button>
-              </div>
-            </div>
-          </div>
 
           <div className="rounded-2xl bg-white/70 ring-1 ring-black/10 p-4">
             <div className="flex items-center justify-between gap-3">
@@ -163,10 +187,11 @@ export function DonateWidget({ caseItem }) {
 
             <div className="mt-3 grid gap-1">
               <input
-                value={String(amount)}
-                onChange={(e) => setAmount(e.target.value)}
+                value={amount}
+                onChange={(e) => setAmount(e.target.value.replace(/\D/g, ""))}
                 inputMode="numeric"
                 className="h-11 rounded-2xl bg-white/80 px-4 text-sm ring-1 ring-black/10 focus:outline-none focus:ring-2 text-black"
+                placeholder="0"
               />
               <div className="text-xs text-slate-600">
                 Your gift supports safety, medical care, shelter, and advocacy.
@@ -199,7 +224,7 @@ export function DonateWidget({ caseItem }) {
             disabled={busy}
             className="h-12 w-full rounded-2xl bg-slate-950 text-white font-extrabold shadow-lg hover:bg-slate-900 disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            {busy ? "Processing…" : `Donate ${formatNGN(amount)} now`}
+            {busy ? "Processing…" : `Donate now`}
           </button>
 
           

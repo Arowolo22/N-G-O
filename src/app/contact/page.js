@@ -106,18 +106,6 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="overflow-hidden rounded-3xl bg-white/70 ring-1 ring-black/10 shadow-sm">
-                <div className="p-4 text-sm font-bold text-slate-950">
-                  Map
-                </div>
-                <iframe
-                  title="Arowolo NGO map"
-                  className="h-64 w-full"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  src="https://www.google.com/maps?q=Lagos%20Nigeria&output=embed"
-                />
-              </div>
 
               <div className="rounded-3xl bg-white/70 ring-1 ring-black/10 shadow-sm p-6">
                 <div className="text-sm font-bold text-slate-950">You can also reach us here</div>
