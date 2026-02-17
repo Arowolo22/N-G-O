@@ -182,7 +182,7 @@ export default function GetHelpPage() {
                   disabled={loading}
                   className="h-12 rounded-2xl bg-slate-950 text-white font-extrabold hover:bg-slate-900 transition disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  {loading ? "Sending..." : "Request Call Back"}
+                  {loading ? "Sending..." : "Send Request"}
                 </button>
               </form>
             </div>

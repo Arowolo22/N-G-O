@@ -46,7 +46,7 @@ export function Navbar() {
             href="/"
             className="flex items-center gap-4 font-extrabold tracking-tight text-slate-950"
           >
-            {/* Logo constrained to a reasonable height to fit navbar */}
+           
             <Image 
               src="/company-logo.png" 
               alt="Arowolo Health Foundation" 

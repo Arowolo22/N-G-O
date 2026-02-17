@@ -10,12 +10,9 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-3">
           <div className="space-y-3">
             <div className="flex items-center gap-4 font-extrabold tracking-tight text-slate-950">
-              {/* LOGO SPACE: Replace the span below with your <Image /> component */}
+            
               <Image src="/company-logo.png" alt="Logo" width={200} height={40} />
-              {/* <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-md shadow-brand/10">
-                <HeartHandshake className="h-6 w-6" aria-hidden="true" />
-              </span>
-              <span>Arowolo Health Foundation</span> */}
+              
             </div>
             <p className="text-sm leading-6 text-slate-700">
               We are dedicated to ending the Tuberculosis epidemic — providing testing, treatment, and support for a TB-free future.
@@ -49,12 +46,7 @@ export function Footer() {
                 <Link href="/contact" className="hover:text-slate-950">
                   Volunteer
                 </Link>
-                <Link href="/login" className="hover:text-slate-950">
-                  Login
-                </Link>
-                <Link href="/signup" className="hover:text-slate-950">
-                  Sign Up
-                </Link>
+               
               </div>
             </div>
           </div>

@@ -7,8 +7,9 @@ import { getCaseById } from "@/lib/cases";
 import { ArrowLeft, ShieldCheck } from "lucide-react";
 import { CaseDetailClient } from "@/app/cases/[id]/CaseDetailClient";
 
-export default function CaseDetailPage({ params }) {
-  const c = getCaseById(params?.id);
+export default async function CaseDetailPage({ params }) {
+  const { id } = await params;
+  const c = getCaseById(id);
   if (!c) return notFound();
 
   return <CaseDetailClient c={c} />;

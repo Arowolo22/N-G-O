@@ -2,6 +2,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Container } from "@/components/Container";
 import { Motion } from "@/components/Motion";
@@ -32,36 +33,41 @@ export default function AboutPage() {
           </motion.div>
 
           <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:items-start">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-20% 0px" }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="overflow-hidden rounded-[2.25rem] bg-white/70 ring-1 ring-black/10 shadow-sm"
-            >
-              <div className="relative aspect-[16/12]">
-                <Image                  
-                src="/founder.jpg"
-                  alt="Founder of Arowolo Health Foundation"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <div className="text-xs font-semibold text-white/85">
-                    Founder
-                  </div>
-                  <div className="mt-1 text-2xl font-extrabold tracking-tight text-white">
-                    Arowolo
-                  </div>
-                  <div className="mt-1 text-sm text-white/80">
-                    “TB is not just a medical issue; it’s a failure of access. We are fixing that.”
+            <Link href="/about/founder" className="group block">
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-20% 0px" }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="overflow-hidden rounded-[2.25rem] bg-white/70 ring-1 ring-black/10 shadow-sm transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-1 group-hover:ring-brand/20"
+              >
+                <div className="relative aspect-[16/14]">
+                  <Image                  
+                    src="/founder.jpg"
+                    alt="Founder of Arowolo Health Foundation"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <div className="text-xs font-semibold text-white/85">
+                      Founder
+                    </div>
+                    <div className="mt-1 text-2xl font-extrabold tracking-tight text-white">
+                      Arowolo
+                    </div>
+                    <div className="mt-1 text-sm text-white/80">
+                      “TB is not just a medical issue; it’s a failure of access. We are fixing that.”
+                    </div>
+                    <div className="mt-4 inline-flex items-center gap-2 text-xs font-bold text-white bg-white/10 backdrop-blur-md px-3 py-2 rounded-xl group-hover:bg-white/20 transition-colors">
+                      Read his story
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </Link>
 
             <div className="grid gap-6">
               <div className="rounded-3xl bg-white/70 ring-1 ring-black/10 shadow-sm p-6">

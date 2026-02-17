@@ -46,7 +46,7 @@ export function CaseDetailClient({ c }) {
                     {c.name}
                     {c.age ? <span className="text-white/80"> · {c.age}</span> : null}
                   </h1>
-                  <p className="mt-2 text-sm text-white/85">{c.title}</p>
+                  {c.title && <p className="mt-2 text-sm text-white/85">{c.title}</p>}
                 </div>
               </div>
 
@@ -56,7 +56,7 @@ export function CaseDetailClient({ c }) {
                     Patient Story
                   </h2>
                   <div className="mt-4 prose prose-slate prose-sm sm:prose-base text-slate-700 whitespace-pre-line">
-                    {c.story}
+                    {c.story || "No story details available for this case."}
                   </div>
 
                   <div className="mt-8 rounded-3xl bg-slate-900/5 ring-1 ring-black/10 p-5">

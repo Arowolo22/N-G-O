@@ -10,6 +10,8 @@ import { Mail, MapPin, PhoneCall, Instagram, Facebook, Twitter } from "lucide-re
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   return (
     <Motion>
@@ -45,42 +47,84 @@ export default function ContactPage() {
 
               <form
                 className="mt-5 grid gap-3"
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
-                  setSent(true);
-                  toast.success("Message sent. We'll get back to you soon.");
+                  
+                  const formData = new FormData(e.target);
+                  const name = formData.get("name");
+                  const email = formData.get("email");
+                  const phone = formData.get("phone");
+                  const message = formData.get("message");
+
+                  setLoading(true);
+                  setError("");
+                  setSent(false);
+
+                  try {
+                    const res = await fetch("/api/contact", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ name, email, phone, message }),
+                    });
+
+                    const data = await res.json().catch(() => ({}));
+
+                    if (!res.ok) {
+                      throw new Error(data.error || "Failed to send message.");
+                    }
+
+                    setSent(true);
+                    toast.success("Message sent. We'll get back to you soon.");
+                    e.target.reset();
+                  } catch (err) {
+                    setError(err.message);
+                    toast.error(err.message);
+                  } finally {
+                    setLoading(false);
+                  }
                 }}
               >
                 <div className="grid gap-3 sm:grid-cols-2">
                   <input
                     required
+                    name="name"
                     placeholder="Full name"
                     className="h-11 rounded-2xl bg-white/80 px-4 text-sm ring-1 ring-black/10 focus:outline-none focus:ring-2 text-black"
                   />
                   <input
                     required
+                    name="email"
+                    type="email"
                     placeholder="Email"
                     className="h-11 rounded-2xl bg-white/80 px-4 text-sm ring-1 ring-black/10 focus:outline-none focus:ring-2 text-black"
                   />
                 </div>
                 <input
+                  name="phone"
                   placeholder="Phone (optional)"
                   className="h-11 rounded-2xl bg-white/80 px-4 text-sm ring-1 ring-black/10 focus:outline-none focus:ring-2 text-black"
                 />
                 <textarea
                   required
+                  name="message"
                   rows={5}
                   placeholder="Your message"
                   className="rounded-2xl bg-white/80 px-4 py-3 text-sm ring-1 ring-black/10 focus:outline-none focus:ring-2 text-black"
                 />
-                <Button type="submit" variant="dark" className="h-12 w-full">
-                  Send message
+                <Button 
+                  type="submit" 
+                  variant="dark" 
+                  className="h-12 w-full"
+                  disabled={loading}
+                >
+                  {loading ? "Sending..." : "Send message"}
                 </Button>
-                {sent ? (
-                  <div className="rounded-2xl bg-emerald-50 text-emerald-900 ring-1 ring-emerald-200 px-4 py-3 text-sm">
-                    Message sent. We’ll get back to you soon.
+                
+                {error && (
+                  <div className="rounded-2xl bg-red-50 text-red-800 ring-1 ring-red-200 px-4 py-3 text-sm">
+                    {error}
                   </div>
-                ) : null}
+                )}
               </form>
             </div>
 

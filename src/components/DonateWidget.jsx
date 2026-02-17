@@ -5,28 +5,29 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ShieldAlert, Sparkles, Lock } from "lucide-react";
 import { useDonations } from "@/hooks/useDonations";
-
 import { formatNGN } from "@/lib/money";
 import toast from "react-hot-toast";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Button } from "@/components/Button";
 
-const preset = [5000, 10000, 25000, 50000];
+
 
 export function DonateWidget({ caseItem, bare = false }) {
   const router = useRouter();
-
   const { getTotalFor, addDonation } = useDonations();
   const raised = getTotalFor(caseItem.id);
 
+  
 
-  const [method, setMethod] = useState("demo"); // demo | stripe | paystack (UI only for now)
-  const [amount, setAmount] = useState(10000);
+  const [method, setMethod] = useState("demo"); 
+  const [amount, setAmount] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [note, setNote] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+
+
 
   const pct = useMemo(() => {
     if (!caseItem.goalAmount) return 0;
@@ -71,10 +72,10 @@ export function DonateWidget({ caseItem, bare = false }) {
       const handler = window.PaystackPop.setup({
         key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
         email: email,
-        amount: amt * 100, // Paystack works in kobo
+        amount: amt * 100,
         currency: "NGN",
         callback: function (response) {
-          // Success!
+          
           addDonation(caseItem.id, amt, name);
           router.refresh?.();
           toast.success(`Thank you! You donated ${formatNGN(amt)} to this case.`);
@@ -168,22 +169,6 @@ export function DonateWidget({ caseItem, bare = false }) {
              
             </div>
 
-            <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-              {preset.map((p) => (
-                <button
-                  key={p}
-                  type="button"
-                  onClick={() => setAmount(p)}
-                  className={`h-10 rounded-xl text-sm font-semibold ring-1 transition ${
-                    amount === p
-                      ? "bg-slate-950 text-white ring-black/10"
-                      : "bg-white/70 text-slate-900 ring-black/10 hover:bg-white"
-                  }`}
-                >
-                  {formatNGN(p)}
-                </button>
-              ))}
-            </div>
 
             <div className="mt-3 grid gap-1">
               <input
@@ -193,9 +178,7 @@ export function DonateWidget({ caseItem, bare = false }) {
                 className="h-11 rounded-2xl bg-white/80 px-4 text-sm ring-1 ring-black/10 focus:outline-none focus:ring-2 text-black"
                 placeholder="0"
               />
-              <div className="text-xs text-slate-600">
-                Your gift supports safety, medical care, shelter, and advocacy.
-              </div>
+             
             </div>
           </div>
 
@@ -210,7 +193,7 @@ export function DonateWidget({ caseItem, bare = false }) {
               placeholder="Leave an encouragement or note (optional)"
               className="rounded-2xl bg-white/80 px-4 py-3 text-sm ring-1 ring-black/10 focus:outline-none focus:ring-2 focus:ring-sky-400/50"
             />
-          </label>
+            </label>
 
           {error ? (
             <div className="rounded-2xl bg-red-50 text-red-800 ring-1 ring-red-200 px-4 py-3 text-sm flex items-start gap-2">
@@ -226,8 +209,6 @@ export function DonateWidget({ caseItem, bare = false }) {
           >
             {busy ? "Processing…" : `Donate now`}
           </button>
-
-          
         </div>
       </form>
     </div>

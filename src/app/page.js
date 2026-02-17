@@ -93,9 +93,9 @@ function HomeClient() {
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
                 className="mt-8 flex flex-col gap-3 sm:flex-row"
               >
-                <Button href="/donate" variant="primary" className="h-12 bg-brand hover:bg-brand/90 text-white border-none">
+                <Button href="/about" variant="primary" className="h-12 bg-brand hover:bg-brand/90 text-white border-none">
                   <HeartHandshake className="h-4 w-4" aria-hidden="true" />
-                  Donate to Save Lives
+                  About us
                 </Button>
                 <Button href="/contact" variant="ghost" className="h-12 text-white hover:bg-white/10 ring-white/30">
                   Get Screened

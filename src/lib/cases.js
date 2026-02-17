@@ -28,11 +28,11 @@ Your donation will cover his transport to the clinic, essential food packs for h
   {
     id: "nutritional-support",
     name: "Fatima Yusuf",
-    age: 21,
+    age: 51,
     // title: "High-protein diet for fast recovery",
     tbType: "Extrapulmonary TB (Lymph Node)",
     stage: "Recovery Phase",
-    story: `Fatima, a 28-year-old seamstress, was diagnosed with TB of the lymph nodes after noticing painful swellings in her neck. While the medication is free, the toll it takes on the body is immense.
+    story: `Fatima, a 51x-year-old seamstress, was diagnosed with TB of the lymph nodes after noticing painful swellings in her neck. While the medication is free, the toll it takes on the body is immense.
 
 TB medication requires a strong immune system and a full stomach to be effective. Malnutrition is one of the biggest reasons treatment fails, leading to relapse or drug resistance. Fatima lives in a rural community where access to protein-rich food is limited and expensive.
 
@@ -49,7 +49,7 @@ This simple intervention significantly boosts cure rates and helps patients like
     problem:
       "TB causes severe weight loss and weakens the immune system. We provide high-protein food packs (beans, eggs, milk) to help patients rebuild strength while on medication.",
     goalAmount: 120000,
-    image:"/fatima.jpg",
+    image:"/fatoma.jpg",
     tags: ["Food", "Nutrition", "Strength"],
   },
   {
