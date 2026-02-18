@@ -112,7 +112,7 @@ function HomeClient() {
                 <div className="grid grid-cols-3 gap-2 text-sm sm:gap-8">
                   <div>
                     <div className="text-3xl font-extrabold tracking-tight text-white">
-                      <AnimatedCounter value={1200} suffix="+" />
+                      <AnimatedCounter value={20} suffix="+" />
                     </div>
                     <div className="mt-1 text-sm text-white/80">
                       Patients Screened
@@ -120,7 +120,7 @@ function HomeClient() {
                   </div>
                   <div>
                     <div className="text-3xl font-extrabold tracking-tight text-white">
-                      <AnimatedCounter value={450} suffix="+" />
+                      <AnimatedCounter value={5} suffix="+" />
                     </div>
                     <div className="mt-1 text-sm text-white/80">
                       Active Treatments
