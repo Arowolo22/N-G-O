@@ -64,9 +64,7 @@ export default function GetHelpPage() {
                     <Button href="tel:+2348000000000" variant="dark" className="h-12">
                       Call now
                     </Button>
-                    <Button href="/contact" variant="subtle" className="h-12">
-                      Send a message
-                    </Button>
+                   
                   </div>
                 </div>
               </div>

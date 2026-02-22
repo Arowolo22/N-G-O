@@ -9,6 +9,8 @@ import { formatNGN } from "@/lib/money";
 import toast from "react-hot-toast";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Button } from "@/components/Button";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, updateDoc, doc, serverTimestamp } from "firebase/firestore";
 
 
 
@@ -64,10 +66,24 @@ export function DonateWidget({ caseItem, bare = false }) {
     }
 
     setBusy(true);
+    let donationDocRef = null;
+
     try {
       if (typeof window.PaystackPop === "undefined") {
         throw new Error("Paystack is still loading. Please try again in a moment.");
       }
+
+      // 1. Create a pending donation record in Firebase
+      donationDocRef = await addDoc(collection(db, "donations"), {
+        caseId: caseItem.id,
+        caseName: caseItem.name,
+        amount: amt,
+        donorName: name || "Anonymous",
+        donorEmail: email,
+        donorNote: note,
+        status: "pending",
+        createdAt: serverTimestamp(),
+      });
 
       const handler = window.PaystackPop.setup({
         key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
@@ -75,6 +91,14 @@ export function DonateWidget({ caseItem, bare = false }) {
         amount: amt * 100,
         currency: "NGN",
         callback: function (response) {
+          // 2. Update status to success on callback
+          if (donationDocRef) {
+            updateDoc(doc(db, "donations", donationDocRef.id), {
+              status: "success",
+              paystackReference: response.reference,
+              updatedAt: serverTimestamp(),
+            }).catch((err) => console.error("Firebase update failed:", err));
+          }
           
           addDonation(caseItem.id, amt, name);
           router.refresh?.();
@@ -82,6 +106,13 @@ export function DonateWidget({ caseItem, bare = false }) {
           setBusy(false);
         },
         onClose: function () {
+          // 3. Update status to cancelled on close
+          if (donationDocRef) {
+            updateDoc(doc(db, "donations", donationDocRef.id), {
+              status: "cancelled",
+              updatedAt: serverTimestamp(),
+            }).catch((err) => console.error("Firebase update failed:", err));
+          }
           setBusy(false);
           toast.error("Payment cancelled.");
         },
@@ -107,6 +138,15 @@ export function DonateWidget({ caseItem, bare = false }) {
       setError(msg);
       toast.error(msg);
       setBusy(false);
+
+      // 4. Update status to failed if error occurs before opening Paystack or during setup
+      if (donationDocRef) {
+        await updateDoc(doc(db, "donations", donationDocRef.id), {
+          status: "failed",
+          errorMessage: msg,
+          updatedAt: serverTimestamp(),
+        });
+      }
     }
   }
 
@@ -191,7 +231,7 @@ export function DonateWidget({ caseItem, bare = false }) {
               onChange={(e) => setNote(e.target.value)}
               rows={3}
               placeholder="Leave an encouragement or note (optional)"
-              className="rounded-2xl bg-white/80 px-4 py-3 text-sm ring-1 ring-black/10 focus:outline-none focus:ring-2 focus:ring-sky-400/50"
+              className="rounded-2xl bg-white/80 px-4 py-3 text-sm ring-1 ring-black/10 text-black"
             />
             </label>
 
