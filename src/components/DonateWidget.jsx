@@ -85,8 +85,13 @@ export function DonateWidget({ caseItem, bare = false }) {
         createdAt: serverTimestamp(),
       });
 
+      const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY;
+      if (!publicKey) {
+        throw new Error("Paystack public key is missing. Please check your environment variables.");
+      }
+
       const handler = window.PaystackPop.setup({
-        key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
+        key: publicKey,
         email: email,
         amount: amt * 100,
         currency: "NGN",
