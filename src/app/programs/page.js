@@ -5,27 +5,34 @@ import { Container } from "@/components/Container";
 import { Motion } from "@/components/Motion";
 import { Button } from "@/components/Button";
 import { Ambulance, Home, Scale, HeartPulse, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { PROGRAMS } from "@/data/programs";
 
-function ProgramCard({ icon: Icon, title, desc }) {
+function ProgramCard({ icon: Icon, title, desc, slug }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-20% 0px" }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      className="rounded-3xl bg-white/70 ring-1 ring-black/10 shadow-sm p-6"
     >
-      <div className="flex items-start gap-3">
-        <span className="inline-flex h-11 w-22 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-md shadow-sky-500/10">
-          <Icon className="h-5 w-5" aria-hidden="true" />
-        </span>
-        <div>
-          <div className="text-base font-extrabold tracking-tight text-slate-950">
-            {title}
+      <Link 
+        href={`/programs/${slug}`}
+        className="group block rounded-3xl bg-white/70 ring-1 ring-black/10 shadow-sm p-6 transition-all hover:bg-white hover:shadow-md hover:ring-brand/30"
+      >
+        <div className="flex items-start gap-3">
+          <span className="inline-flex h-11 w-22 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-md shadow-sky-500/10 group-hover:scale-105 transition-transform">
+            <Icon className="h-5 w-5" aria-hidden="true" />
+          </span>
+          <div>
+            <div className="text-base font-extrabold tracking-tight text-slate-950 flex items-center gap-2">
+              {title}
+              <ArrowRight className="h-4 w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand" />
+            </div>
+            <div className="mt-2 text-sm leading-7 text-slate-700">{desc}</div>
           </div>
-          <div className="mt-2 text-sm leading-7 text-slate-700">{desc}</div>
         </div>
-      </div>
+      </Link>
     </motion.div>
   );
 }
@@ -62,26 +69,15 @@ export default function ProgramsPage() {
           </motion.div>
 
           <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            <ProgramCard
-              icon={Ambulance}
-              title="Mobile X-Ray & Screening"
-              desc="We bring geneXpert testing and digital X-ray units directly to rural communities to detect TB cases early and prevent transmission."
-            />
-            <ProgramCard
-              icon={HeartPulse}
-              title="DOTS Treatment Support"
-              desc="Our community health workers supervise medication intake (Directly Observed Treatment) to ensure every patient completes their 6-month course."
-            />
-            <ProgramCard
-              icon={Home}
-              title="Nutrition & Food Security"
-              desc="TB medication requires a strong immune system. We provide weekly protein-rich food parcels to patients who cannot afford proper meals."
-            />
-            <ProgramCard
-              icon={Scale}
-              title="Community Advocacy"
-              desc="We train local volunteers to combat stigma, educate families on prevention, and encourage those with symptoms to get tested without fear."
-            />
+            {PROGRAMS.map((program) => (
+              <ProgramCard
+                key={program.slug}
+                slug={program.slug}
+                icon={program.icon}
+                title={program.title}
+                desc={program.desc}
+              />
+            ))}
           </div>
         </Container>
       </section>
